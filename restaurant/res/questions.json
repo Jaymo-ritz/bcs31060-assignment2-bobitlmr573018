@@ -1,0 +1,80 @@
+[
+  {
+    "prompt_name": {
+      "type": "input",
+      "name": "patron_name",
+      "message": "What is your name"
+    },
+    "prompt_menu": {
+      "type": "list",
+      "name": "selected_menu",
+      "message": "Which menu would you like to view"
+    },
+    "prompt_item": {
+      "type": "rawlist",
+      "name": "item_ordered",
+      "message": "What item would you like to order"
+    },
+    "prompt_servings": {
+      "type": "input",
+      "name": "servings_count",
+      "message": "How many servings"
+    },
+    "prompt_add_order": {
+      "type": "confirm",
+      "name": "add_order",
+      "message": "Would you like to order anything else"
+    },
+    "prompt_confirm_orders": {
+      "type": "confirm",
+      "name": "change_order",
+      "message": "Would you like to change your order"
+    },
+    "prompt_order_changes": {
+      "type": "list",
+      "name": "order_change_type",
+      "message": "How would you like to change your order",
+      "choices": [
+        "Add an order",
+        "Change number of servings",
+        "Remove an order"
+      ]
+    },
+    "get_update_order": {
+      "type": "list",
+      "name": "order_to_update",
+      "message": "Which order would you like to change"
+    },
+
+    "get_updated_servings": {
+      "type": "input",
+      "name": "servings_count",
+      "message": "How many serving do you want"
+    },
+
+    "get_delete_order": {
+      "type": "list",
+      "name": "order_to_delete",
+      "message": "Which order would you like to delete"
+    },
+
+    "prompt_serving_order" : {
+      "type": "list",
+      "name": "serving_order",
+      "message": "In which order would you like to be served"
+    }
+  },
+  {
+    "prompt_service_number": {
+      "type": "input",
+      "name": "service_number",
+      "message": "Please enter your service number"
+    },
+   "prompt_amount": {
+     "type": "input",
+     "name": "amount_paid",
+     "message": "Please enter an amount that covers the bill"
+   }
+  }
+
+]

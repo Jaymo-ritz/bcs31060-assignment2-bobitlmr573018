@@ -1,0 +1,4 @@
+PyInquirer~=1.0.3
+regex~=2020.11.13
+colorlog~=4.6.2
+terminaltables
