@@ -62,6 +62,11 @@
       "type": "list",
       "name": "serving_order",
       "message": "In which order would you like to be served"
+    },
+    "prompt_service_number": {
+      "type": "input",
+      "name": "service_number",
+      "message": "Please enter your service number"
     }
   },
   {

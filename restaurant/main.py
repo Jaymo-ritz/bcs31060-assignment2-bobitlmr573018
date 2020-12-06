@@ -10,7 +10,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-w", "--waiter", help="run the program in waiter mode.", action="store_true")
     parser.add_argument("-c", "--cashier", help="run the program in cashier mode.", action="store_true")
-    parser.add_argument("-r", "--reset", help="reset the database", action="store_true")
+    parser.add_argument("-u", "--update", help="reset the database", action="store_true")
+    parser.add_argument("-r", "--reset", help="update a customers orders", action="store_true")
 
     args = parser.parse_args()
     if not database.database_exists() or args.reset:
@@ -22,6 +23,8 @@ def main():
         cashier.start()
     elif args.waiter:
         waiter.start()
+    elif args.update:
+        waiter.start_update()
     else:
         parser.print_help()
 
