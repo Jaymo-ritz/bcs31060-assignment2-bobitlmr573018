@@ -22,8 +22,6 @@ class RestaurantWaiterCli:
         self._orders = []
 
     def _serve(self):
-        self._welcome_patron()
-        self._order_item()
         self._confirm_orders()
         self._set_serving_order()
         self._commit_orders()
@@ -119,7 +117,7 @@ class RestaurantWaiterCli:
         answer = prompt(question)
         order_to_delete = answer["order_to_delete"]
 
-        self._remove_from_order(order_to_delete)
+        self._remove_from_order((order_to_delete,))
 
     def _set_serving_order(self):
         order_types = []
@@ -181,7 +179,20 @@ class RestaurantWaiterCli:
 
         print("Have a wonderful day!")
 
+    def start_update(self):
+        question = self.questions["prompt_service_number"]
+        answer = prompt(question)
+        self._service_number = answer["service_number"]
+
+        for order in orders.get_orders(self._service_number):
+            self._add_to_orders((order["item"], order["servings"]))
+
+        self._serve()
+
+
     def start(self):
+        self._welcome_patron()
+        self._order_item()
         self._serve()
 
 
