@@ -19,7 +19,8 @@ class Bills(RestaurantDatabase):
                        date
                   FROM bills
                   WHERE service_number = ?'''
-        return self.execute_query(query, (service_number,))[0]
+        result = self.execute_command(query, (service_number,))[0]
+        return result
 
 
 bills = Bills()

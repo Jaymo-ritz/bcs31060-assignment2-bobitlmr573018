@@ -8,6 +8,7 @@ from terminaltables import AsciiTable
 from restaurant.core.bills import bills
 from restaurant.core.orders import orders
 from restaurant.utils.utils import color
+from restaurant.core.patron import patron
 from restaurant.utils.utils import get_questions
 
 
@@ -24,9 +25,13 @@ class RestaurantCashierCli:
         answer = prompt(question)
 
         service_number = answer["service_number"]
-        self._display_bill(service_number)
-        self._process_payment(service_number)
-        self._display_bill(service_number, True)
+        if patron.patron_exists(service_number):
+            self._display_bill(service_number)
+            self._process_payment(service_number)
+            self._display_receipt(service_number)
+        else:
+            print("You have not made any orders yet.")
+
         self._exit()
 
     def _process_payment(self, service_number, charge=-1):
@@ -88,6 +93,9 @@ class RestaurantCashierCli:
         table = AsciiTable(data)
         print()
         print(table.table)
+
+    def _display_receipt(self, service_number):
+        self._display_bill(service_number, True)
 
     def _exit(self):
         print("Thank you for dining with us.")

@@ -31,17 +31,17 @@ class Menu(RestaurantDatabase):
 
     def get_item_price(self, item):
         query = "SELECT price FROM menu WHERE item = ?"
-        rows = self.execute_query(query, (item,))
+        rows = self.execute_command(query, (item,))
         return rows[0]['price']
 
     def get_available_servings(self, item):
         query = "SELECT available_servings FROM menu WHERE item=?"
-        rows = self.execute_query(query, (item,))
+        rows = self.execute_command(query, (item,))
         return rows[0]['available_servings']
 
     def can_order_item(self, item, servings):
         query = "SELECT  FROM items WHERE id=?"
-        rows = self.execute_query(query, (item,))
+        rows = self.execute_command(query, (item,))
         return rows[0]['available_servings'] >= servings
 
     def get_items(self, item_type):
@@ -55,22 +55,22 @@ class Menu(RestaurantDatabase):
                 INNER JOIN meals m ON i.item = m.id
                 WHERE m.type = ?
                 '''
-        rows = self.execute_query(query, (item_type,))
+        rows = self.execute_command(query, (item_type,))
         return rows
 
     def get_item_types(self):
         query = '''SELECT * FROM meal_types'''
-        rows = self.execute_query(query)
+        rows = self.execute_command(query)
         return rows
 
     def get_item_type(self, item):
         query = '''SELECT name FROM meal_types WHERE id = ?'''
-        rows = self.execute_query(query, (item,))
+        rows = self.execute_command(query, (item,))
         return rows[0]["name"]
 
     def get_item_type_id(self, item_type):
         query = '''SELECT id FROM meal_types WHERE name = ?'''
-        rows = self.execute_query(query, (item_type,))
+        rows = self.execute_command(query, (item_type,))
         return rows[0]["id"]
 
 

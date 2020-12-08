@@ -12,7 +12,7 @@ class Orders(RestaurantDatabase):
 
         query = '''INSERT INTO orders(service_number, meal, servings)
                 VALUES(?,?,?) '''
-        self.execute_query(query, order)
+        self.execute_command(query, order)
 
     def remove_order(self, order):
         if type(order[0]) == str:
@@ -22,7 +22,7 @@ class Orders(RestaurantDatabase):
                 WHERE meal = ?
                 AND service_number = ?
                 '''
-        self.execute_query(command, order)
+        self.execute_command(command, order)
 
     def update_order(self, order):
         if type(order[1]) == str:
@@ -33,7 +33,7 @@ class Orders(RestaurantDatabase):
                 WHERE meal = ?
                 AND service_number = ?
                 '''
-        self.execute_query(command, order)
+        self.execute_command(command, order)
 
     def get_orders(self, service_number):
         query = '''SELECT
@@ -46,7 +46,7 @@ class Orders(RestaurantDatabase):
                    INNER JOIN menu i on m.id = i.item
                    WHERE o.service_number = ?
                 '''
-        rows = self.execute_query(query, (service_number,))
+        rows = self.execute_command(query, (service_number,))
         return rows
 
     def total_orders_value(self, service_number):
@@ -56,12 +56,12 @@ class Orders(RestaurantDatabase):
                  INNER JOIN menu i on o.meal = i.item
                  WHERE o.service_number = ?
                  '''
-        rows = self.execute_query(query, (service_number,))
+        rows = self.execute_command(query, (service_number,))
         return rows[0]["total"] or 0
 
     def get_meal_id(self, item):
         query = '''SELECT id FROM meals WHERE name = ?'''
-        rows = self.execute_query(query, (item,))
+        rows = self.execute_command(query, (item,))
         return rows[0]["id"]
 
     def _set_meal_id(self, order, index):
