@@ -11,25 +11,26 @@ class Patron(RestaurantDatabase):
                 VALUES(?,?) '''
         return self.execute_command(command, patron)
 
-    def get_name(self, patron):
+    def get_name(self, service_number):
         query = '''SELECT name
                  FROM patron
                  WHERE service_number = ?
                  '''
-        rows = self.execute_query(query, (patron,))
-        return rows[0]["name"] or None
+        rows = self.execute_command(query, (service_number,))
+        if len(rows) > 1:
+            return rows[0]["name"]
+        return None
 
-    def get_table(self, patron):
+    def get_table(self, service_number):
         query = '''SELECT table_number
                  FROM patron
                  WHERE service_number = ?
                  '''
-        rows = self.execute_query(query, (patron,))
+        rows = self.execute_command(query, (service_number,))
         return rows[0]["table_number"] or None
 
-    def patron_exists(self, patron):
-        name = self.get_name(patron)
-        return name is not None
+    def patron_exists(self, service_number):
+        return self.get_name(service_number) is not None
 
 
 patron = Patron()

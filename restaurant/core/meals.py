@@ -46,12 +46,12 @@ class Meals(RestaurantDatabase):
                     FROM meal_types t
                     INNER JOIN meals m on t.id = m.type 
                     WHERE m.id = ?'''
-        rows = self.execute_query(query, (meal,))
+        rows = self.execute_command(query, (meal,))
         return rows[0]["name"]
 
     def get_meal_id(self, item):
         query = '''SELECT id FROM meals WHERE name = ?'''
-        rows = self.execute_query(query, (item,))
+        rows = self.execute_command(query, (item,))
         return rows[0]["id"]
 
 

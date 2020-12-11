@@ -23,7 +23,8 @@ class RestaurantDatabase:
 
     def execute_command(self, command, values=()):
         connection = self._create_connection()
-        last_row_id = None
+        connection.row_factory = sqlite3.Row
+
         try:
             cursor = connection.cursor()
             if len(values):
@@ -31,37 +32,17 @@ class RestaurantDatabase:
             else:
                 cursor.execute(command)
 
-            connection.commit()
-
             if cursor.lastrowid:
-                last_row_id = cursor.lastrowid
-
-        except Error as e:
-            raise e
-        finally:
-            connection.close()
-
-        return last_row_id
-
-    def execute_query(self, query, values=()):
-        connection = self._create_connection()
-        connection.row_factory = sqlite3.Row
-        try:
-            cursor = connection.cursor()
-            if len(values):
-                cursor.execute(query, values)
+                results = cursor.lastrowid
             else:
-                cursor.execute(query)
-
-            connection.commit()
-            rows = cursor.fetchall()
+                results = cursor.fetchall()
 
         except Error as e:
             raise e
         finally:
             connection.close()
 
-        return rows
+        return results
 
     def execute_script(self, script):
         connection = self._create_connection()
